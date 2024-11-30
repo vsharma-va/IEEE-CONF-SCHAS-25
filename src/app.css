@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Geist Regular";
+    src: url(./lib/assets/fonts/Geist-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "GeistMono Regular";
+    src: url(./lib/assets/fonts/GeistMono-Regular.ttf) format("truetype");
+}
+
+.primary-font{
+    font-family: "Geist Regular";
+}
+
+.brand-font {
+    font-family: "GeistMono Regular";
+}
