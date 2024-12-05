@@ -99,7 +99,7 @@
     //     })
     // }
     function navController() {
-        if(!isNavOpen) {
+        if (!isNavOpen) {
             let navOpenTimeline = gsap.timeline({
                 onComplete: () => {
                     isNavOpen = true;
@@ -112,6 +112,11 @@
                 width: '250px',
                 ease: 'power4.inOut'
             });
+            navOpenTimeline.to('.nav-button', {
+                borderTopRightRadius: '8px',
+                borderBottomRightRadius: '8px',
+                duration: 0.5,
+            }, '<');
             navOpenTimeline.to('.nav-links', {
                 display: 'flex',
                 opacity: 1,
@@ -128,6 +133,11 @@
                 opacity: 0,
                 ease: 'power4.inOut'
             });
+            navCloseTimeline.to('.nav-button', {
+                borderTopRightRadius: '9999px',
+                borderBottomRightRadius: '9999px',
+                duration: 0.5,
+            }, '<');
             navCloseTimeline.to('.nav-content', {
                 display: 'none',
                 opacity: 0,
@@ -153,6 +163,7 @@
             Flip.from(state, {
                 duration: 0.25,
                 ease: 'power4.inOut',
+
                 onComplete: () => {
                     gsap.to(`.${prefix}-submenu-item`, {
                         opacity: 1,
@@ -188,9 +199,30 @@
 
 </script>
 
-<button class="absolute top-3 right-3 h-6 w-6 rounded-full bg-primary nav-button z-[99]" on:click={navController}>
-</button>
-<div class="absolute top-3 right-3 p-5 h-0 w-0 bg-primary/70 backdrop-blur-xl rounded-lg nav-content z-[98] opacity-0 hidden flex-col items-start justify-center">
+<div class="flex flex-row w-full h-fit items-center justify-between fixed top-2 z-[99] px-3">
+    <div class="flex flex-row w-full max-w-full h-full items-center px-3 pt-3 pb-3 bg-primary/20 rounded-full justify-between backdrop-blur-xl">
+        <div class="">
+            <p class="text-xl regular-font text-on-surface/70">Logo Here</p>
+        </div>
+        <button class="flex items-center justify-center h-8 w-8 rounded-full bg-primary nav-button z-[100]"
+                on:click={navController}>
+            <svg width="1rem" height="1rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-surface">
+                <path d="M4 18L20 18" stroke="#f9f9ff" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 12L20 12" stroke="#f9f9ff" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 6L20 6" stroke="#f9f9ff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+    </div>
+</div>
+<div class="fixed top-5 right-6 p-5 h-0 w-0 bg-primary/70 backdrop-blur-xl rounded-lg nav-content z-[99] opacity-0 hidden flex-col items-start justify-center">
+    <button class="flex items-center justify-center h-8 w-8 rounded-full bg-primary nav-button z-[100] absolute top-0 right-0"
+            on:click={navController}>
+        <svg width="1rem" height="1rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-surface">
+            <path d="M4 18L20 18" stroke="#f9f9ff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 12L20 12" stroke="#f9f9ff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 6L20 6" stroke="#f9f9ff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </button>
     <p class="text-xl regular-font font-thin text-surface nav-links opacity-0 hidden">Home</p>
     <div class="text-xl regular-font font-thin text-surface flex-col items-start about-main nav-links opacity-0 hidden"
          on:click={() => {onClickShowSubmenu('about')}}>
@@ -211,7 +243,8 @@
         </button>
         <div class="pl-5 hidden committee-submenu">
             <p class="text-xl regular-font font-thin text-surface/70 committee-submenu-item opacity-0">Advisory</p>
-            <p class="text-xl regular-font font-thin text-surface/70 committee-submenu-item opacity-0">Technical Program</p>
+            <p class="text-xl regular-font font-thin text-surface/70 committee-submenu-item opacity-0">Technical
+                Program</p>
             <p class="text-xl regular-font font-thin text-surface/70 committee-submenu-item opacity-0">Organizing</p>
         </div>
     </div>
