@@ -7,13 +7,20 @@
     export let isSmall;
     export let textColor = "text-surface";
     export let differentiatingFactor;
+    export let image;
+    export let marqueeImage;
+
+    export let speed = "linear"; // CSS transition speed like 'linear', 'ease-in-out'
 
     onMount(() => {
         let marqueeText = document.getElementsByClassName(`marquee-item-${differentiatingFactor}`);
-        for(let i of marqueeText) {
+        for (let i of marqueeText) {
             i.classList.add(textColor);
         }
-        horizontalLoop(document.getElementsByClassName(`marquee-item-${differentiatingFactor}`),{pause: false, repeat: -1});
+        horizontalLoop(document.getElementsByClassName(`marquee-item-${differentiatingFactor}`), {
+            pause: false,
+            repeat: -1
+        });
     })
 
     function horizontalLoop(items, config) {
@@ -88,15 +95,49 @@
         return tl;
     }
 </script>
-<div class="wrapper flex flex-row gap-5 overflow-hidden leading-[1] h-fit items-center justify-center">
-    {#if !isSmall}
-        <p class="ml-5 text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
-        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
-        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
-    {:else}
-        {#each {length: 5} as _}
-            <p class="text-lg font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"
-                data-text-color="{textColor}"><span class="{textColor}" style="opacity: 0.5">{dimText}</span>{mainText}</p>
-        {/each}
-    {/if}
-</div>
+{#if !image}
+    <div class="wrapper flex flex-row gap-5 overflow-hidden leading-[1] h-fit items-center justify-center">
+        {#if !isSmall}
+            <p class="ml-5 text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}">
+                <span class="{textColor}/50">{dimText}</span>{mainText}</p>
+            <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}">
+                <span class="{textColor}/50">{dimText}</span>{mainText}</p>
+            <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}">
+                <span class="{textColor}/50">{dimText}</span>{mainText}</p>
+        {:else}
+            {#each {length: 5} as _}
+                <p class="text-lg font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"
+                   data-text-color="{textColor}"><span class="{textColor}"
+                                                       style="opacity: 0.5">{dimText}</span>{mainText}</p>
+            {/each}
+        {/if}
+    </div>
+{:else}
+    <div class="relative overflow-hidden w-full h-[200px]">
+        <div
+                class="flex animate-marquee whitespace-nowrap space-x-4"
+                style="animation: marquee 20s {{speed}} infinite;">
+            {#each marqueeImage as img (img)}
+                <img src={img} alt="marquee image" class="w-32 h-32 object-cover"/>
+            {/each}
+            {#each marqueeImage as img (img + '-clone')}
+                <img src={img} alt="marquee image" class="w-32 h-32 object-cover"/>
+            {/each}
+        </div>
+    </div>
+{/if}
+
+<style>
+    @keyframes marquee {
+        from {
+            transform: translateX(0%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    .animate-marquee {
+        animation: marquee linear infinite;
+    }
+</style>

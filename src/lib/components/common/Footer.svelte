@@ -1,5 +1,6 @@
 <script>
     import {onMount} from "svelte";
+    import Waves from "$lib/components/common/Waves.svelte";
 
     let currentTime;
 
@@ -22,7 +23,10 @@
     $: reactiveTime = currentTime;
 </script>
 {#if !tighter}
-    <div class="h-fit w-full flex flex-col px-5 mt-20">
+    <div class="h-fit w-full flex flex-col px-5 mt-20 items-center justify-center relative">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+            <Waves/>
+        </div>
         <p class="text-sm brand-font text-on-surface/50 uppercase">#a8c8ff</p>
         <p class="text-sm brand-font text-on-surface/50 uppercase mt-3 mb-3">{reactiveTime}</p>
         <p class="text-sm brand-font text-on-surface/50 uppercase">TWITTER</p>
