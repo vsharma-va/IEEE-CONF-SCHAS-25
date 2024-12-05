@@ -96,11 +96,11 @@
     }
 </script>
 
-<canvas bind:this={canvas} class="w-full h-full"></canvas>
+<canvas bind:this={canvas} class="w-full h-full overflow-x-hidden"></canvas>
 
 <style>
     canvas {
-        display: block;
+        display: flex;
         width: 100%;
         height: 100%;
     }

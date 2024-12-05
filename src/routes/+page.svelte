@@ -137,7 +137,7 @@
            style="writing-mode: vertical-lr">
             Important
             Dates</p>
-        <div class="w-fit min-w-[850px] h-full flex flex-col items-start justify-start gap-3">
+        <div class="w-fit max-w-[850px] h-full flex flex-col items-start justify-start gap-3">
             <div class="flex flex-col">
                 <p class="text-lg lg:text-xl regular-font text-on-surface/50">1st May 2025</p>
                 <p class="text-xl lg:text-2xl regular-font text-on-surface/70">Call For Paper</p>
